@@ -32,7 +32,7 @@ io.on("connection", socket => {
   socket.on("createMessage", ( messageData, callback ) => {
     console.log("Message Data: ", messageData);
     io.emit("newMessage", generateMessage(messageData.from, messageData.text));
-    callback('This is from the server');
+    callback();
     // socket.broadcast.emit("newMessage", {
     //   from: messageData.from,
     //   text: messageData.text,
