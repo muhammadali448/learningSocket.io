@@ -6,9 +6,17 @@ socket.on("connect", function() {
   //   text: 'hello yasira'
   // })
 });
-socket.on('newMessage', function(message) {
-  console.log('newMessage', message);
-})
+socket.on("newMessage", function(message) {
+  console.log("newMessage", message);
+});
+
+socket.emit("createMessage", {
+  from: "Raja Jee",
+  text: "Hello Frndx Chai peelo"
+}, function(data) {
+  console.log('Got it ', data);
+});
+
 socket.on("disconnect", function() {
   console.log("disconnected from server");
 });
