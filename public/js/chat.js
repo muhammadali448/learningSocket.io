@@ -21,6 +21,16 @@ socket.on("connect", function() {
   //   from: 'muhammadali',
   //   text: 'hello yasira'
   // })
+  var params = jQuery.deparam(window.location.search);
+  socket.emit('join', params, function (err) { 
+    if(err) {
+      alert(err);
+      window.location.href = '/';
+    }
+    else {
+      console.log('No error');
+    }
+   })
 });
 socket.on("newMessage", function(message) {
   var formattedTime = moment(message.createdAt).format('h:mm:a');
@@ -66,6 +76,15 @@ jQuery("#message-form").on("submit", function(e) {
     }
   );
 });
+
+socket.on('updateUserList', function (users) { 
+  // console.log('Users list ', users);
+  var ol = jQuery('<ol></ol>');
+  users.forEach((user) => {
+    ol.append(jQuery('<li></li>').text(user))
+  })
+  jQuery('#users').html(ol);
+ })
 
 socket.on("newLocationMessage", function(message) {
   var formattedTime = moment(message.createdAt).format('h:mm:a');
